@@ -5,8 +5,9 @@ description = ""
 authors = [
     {name = "back2prime",email = "alextop7771@gmail.com"}
 ]
-requires-python = ">=3.14"
+requires-python = ">=3.14,<3.15"
 dependencies = [
+    "aiogram (>=3.31.0,<4.0.0)"
 ]
 
 
