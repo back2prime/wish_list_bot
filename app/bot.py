@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 
 from keyboard_routers import router
 
-
 load_dotenv()
 
 bot_token = getenv("BOT_TOKEN")
@@ -18,6 +17,7 @@ if bot_token:
     bot = Bot(token=bot_token)
 else:
     raise ValueError("Не удалось найти BOT_TOKEN")
+
 
 async def main():
 
