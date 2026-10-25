@@ -4,7 +4,7 @@ from aiogram.types import Message, CallbackQuery
 
 from keyboard_utils import create_keyboard
 
-from app.enums import KeyboardButtons as KB
+from app.keyboard_enums import KeyboardButtons as KB
 
 router = Router()
 
