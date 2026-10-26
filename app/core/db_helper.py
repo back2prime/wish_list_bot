@@ -7,6 +7,7 @@ from sqlalchemy.ext.asyncio import (
     AsyncEngine,
 )
 
+from app.core.base import Base
 from app.core.config import settings
 
 
@@ -23,6 +24,10 @@ class DatabaseHelper:
     async def get_session(self) -> AsyncGenerator[AsyncSession, Any]:
         async with self.session_factory() as session:
             yield session
+
+    async def create_tables(self) -> None:
+        async with self.engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
 
 
 db = DatabaseHelper(
