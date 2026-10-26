@@ -5,7 +5,11 @@ from os import getenv
 
 from dotenv import load_dotenv
 
+from app.ORM.database_middleware import DatabaseMiddleware
 from keyboard_routers import router
+
+from app.core.db_helper import db
+from app.ORM.models import Item, User, Wishlist  # noqa
 
 load_dotenv()
 
@@ -20,7 +24,8 @@ else:
 
 
 async def main():
-
+    dp.update.middleware(DatabaseMiddleware())
+    await db.create_tables()
     dp.include_router(router)
     await dp.start_polling(bot)
 
