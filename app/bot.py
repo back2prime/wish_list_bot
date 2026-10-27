@@ -6,16 +6,17 @@ from os import getenv
 from dotenv import load_dotenv
 
 from app.ORM.database_middleware import DatabaseMiddleware
-from keyboard_routers import router
 
 from app.core.db_helper import db
 from app.ORM.models import Item, User, Wishlist  # noqa
+from app.handlers import main_router
 
 load_dotenv()
 
 bot_token = getenv("BOT_TOKEN")
 
 dp = Dispatcher()
+
 
 if bot_token:
     bot = Bot(token=bot_token)
@@ -26,7 +27,7 @@ else:
 async def main():
     dp.update.middleware(DatabaseMiddleware())
     await db.create_tables()
-    dp.include_router(router)
+    dp.include_router(main_router)
     await dp.start_polling(bot)
 
 
